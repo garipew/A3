@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Camisetas</h1>
+  
+<ul>
+  {% for x in camisetas %}
+    <li> <a href="detalhes/{{ x.id }}"> {{ x.nome }} {{ x.tamanho }}</a></li>
+  {% endfor %}
+</ul>
+
+<h4>Retornar ao <a href="/">menu</a></h4>
+</body>
+</html>

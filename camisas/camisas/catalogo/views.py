@@ -1,9 +1,14 @@
 from django.http import HttpResponse
 from django.template import loader
+from .models import Camiseta
 
 def catalogo(request):
-    template = loader.get_template('produto.html')
-    return HttpResponse(template.render())
+    camisetas = Camiseta.objects.all().values()
+    template = loader.get_template('todos_produtos.html')
+    context = {
+        'camisetas' : camisetas,
+    }
+    return HttpResponse(template.render(context, request))
 
 def main(request):
   template = loader.get_template('index.html')
@@ -20,3 +25,11 @@ def contato(request):
 def testing(request):
   template = loader.get_template('template.html')
   return HttpResponse(template.render())
+
+def detalhes(request, id):
+  camiseta = Camiseta.objects.get(id=id)
+  template = loader.get_template('detalhes.html')
+  context = {
+    'camiseta': camiseta,
+  }
+  return HttpResponse(template.render(context, request))
