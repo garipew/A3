@@ -4,7 +4,7 @@ Para instalar é necessário primeiro criar um ambiente virtual e instalar o Dja
 Windows:
 ```
 py -m venv nome_ambiente_virtual
-dir nome_ambiente_virtual
+cd nome_ambiente_virtual
 py -m pip install Django
 git clone https://github.com/garipew/A3.git
 ```
