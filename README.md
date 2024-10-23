@@ -5,7 +5,7 @@ Windows:
 ```
 py -m venv nome_ambiente_virtual
 cd nome_ambiente_virtual
-Scipts\activate.bat
+Scripts\activate.bat
 py -m pip install Django
 git clone https://github.com/garipew/A3.git camiseta
 ```
