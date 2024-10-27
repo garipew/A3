@@ -1,18 +1,18 @@
- A3
+# A3
 ## Instalação
 Para instalar é necessário primeiro criar um ambiente virtual e instalar o Django.<br/>
 Windows:
 ```
-py -m venv nome_ambiente_virtual
-cd nome_ambiente_virtual
+py -m venv loja_virtual
+cd loja_virtual
 Scripts\activate.bat
 py -m pip install Django
 git clone https://github.com/garipew/A3.git camiseta
 ```
 Unix:
 ```
-python -m venv nome_ambiente_virtual
-cd nome_ambiente_virtual
+python -m venv loja_virtual
+cd loja_virtual
 source bin/activate
 python -m pip install Django
 git clone https://github.com/garipew/A3.git camiseta
