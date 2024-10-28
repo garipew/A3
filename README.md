@@ -3,20 +3,25 @@
 Para instalar é necessário primeiro criar um ambiente virtual e instalar o Django.<br/>
 Windows:
 ```
-py -m venv loja_virtual
-cd loja_virtual
+py -m venv env
+cd env
 Scripts\activate.bat
-py -m pip install Django
 git clone https://github.com/garipew/A3.git camisas
 ```
 Unix:
 ```
-python -m venv loja_virtual
-cd loja_virtual
+python3 -m venv env
+cd env
 source bin/activate
-python -m pip install Django
 git clone https://github.com/garipew/A3.git camisas
 ```
+
+Em seguida, é necessário instalar as dependencias com:
+```
+cd camisas
+pip install -r requirements.txt
+```
+
 ## Execução
 Para executar basta seguir a forma usual do Django:<br/>
 Windows:
@@ -25,5 +30,5 @@ py manage.py runserver
 ```
 Unix:
 ```
-python manage.py runserver
+python3 manage.py runserver
 ```
