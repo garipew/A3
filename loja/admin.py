@@ -6,3 +6,5 @@ class CamisetaAdmin(admin.ModelAdmin):
     list_display = ("nome", "tamanho",)
 
 admin.site.register(Camiseta, CamisetaAdmin)
+
+# Register your models here.

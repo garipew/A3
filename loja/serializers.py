@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from catalogo import models
+from . import models
 
 
 class CamisetaSerializer(serializers.ModelSerializer):
