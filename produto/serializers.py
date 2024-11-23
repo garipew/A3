@@ -7,6 +7,9 @@ class CamisetaSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "nome",
-            "tamanho",
+            "preco",
+            "quantidade",
+            "descricao",
+            "img",
         )
         model = models.Camiseta

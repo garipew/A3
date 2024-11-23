@@ -3,7 +3,7 @@ from .models import Camiseta
 
 # Register your models here.
 class CamisetaAdmin(admin.ModelAdmin):
-    list_display = ("nome", "tamanho",)
+    list_display = ("nome", "preco", "quantidade", "descricao", "img")
 
 admin.site.register(Camiseta, CamisetaAdmin)
 
