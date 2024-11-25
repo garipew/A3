@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
+    path('api/', include("carrinho.urls")),
     path('api/', include("produto.urls")),
     path('admin/', admin.site.urls),
 ]
