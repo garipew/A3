@@ -13,5 +13,5 @@ class CarrinhoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Carrinho
-        fields = ['id', 'sessao', 'itens', 'total_preco']
+        fields = ['id', 'name', 'itens', 'total_preco']
 

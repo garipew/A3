@@ -6,36 +6,62 @@ from .serializers import CarrinhoSerializer, CarrinhoItemSerializer
 from django.shortcuts import get_object_or_404
 
 class CarrinhoViewSet(viewsets.ViewSet):
-    def get_carrinho_sessao(self, request):
-        if not request.session.session_key:
-            request.session.create()
-        sessao = request.session.session_key
-        carrinho,created = Carrinho.objects.get_or_create(sessao=sessao)
-        return carrinho
-
     def list(self, request):
-        carrinho = self.get_carrinho_sessao(request)
+        carrinho,created = Carrinho.objects.get_or_create(name='test')
         serializer = CarrinhoSerializer(carrinho)
         return Response(serializer.data)
 
-    def create(self, request):
-        carrinho = self.get_carrinho_sessao(request)
-        serializer = CarrinhoSerializer(carrinho, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
     def adicionar_item(self, request, camiseta_id=None):
         camiseta = get_object_or_404(Camiseta, id=camiseta_id)
-        carrinho = self.get_carrinho_sessao(request)
+        carrinho,created = Carrinho.objects.get_or_create(name='test')
 
+        quantidade=0
+        carrinho_item = None
+        for item in carrinho.itens.all():
+            if item.camiseta == camiseta:
+                carrinho_item = item
+                quantidade = carrinho_item.quantidade
+                break
+        adicionados=int(request.data['quantidade']) or 1
+        quantidade+=adicionados
+        
+        if carrinho_item:
+            carrinho.itens.remove(carrinho_item)
+            
         carrinho_item, created = CarrinhoItem.objects.get_or_create(
             camiseta=camiseta,
-            quantidade=1  
+            quantidade=quantidade
         )
 
         carrinho.itens.add(carrinho_item)
 
         return Response({'status': 'Item adicionado ao carrinho'})
 
+    def remover_item(self, request, camiseta_id=None):
+        camiseta = get_object_or_404(Camiseta, id=camiseta_id)
+        carrinho,created = Carrinho.objects.get_or_create(name='test')
+        
+        carrinho_item = None
+        for item in carrinho.itens.all():
+            if item.camiseta == camiseta:
+                carrinho_item = item
+                break
+
+        if carrinho_item:
+            removidos = int(request.data['quantidade']) or 1
+            nova_quantidade = carrinho_item.quantidade - removidos
+
+            carrinho.itens.remove(carrinho_item)
+            if(nova_quantidade > 0):
+                novo_item, created = CarrinhoItem.objects.get_or_create(
+                camiseta=camiseta,
+                quantidade=nova_quantidade
+            )
+                carrinho.itens.add(novo_item)
+
+        return Response({'status': 'Item removido do carrinho'})
+
+    def esvaziar_carrinho(self, request):
+        carrinho,created = Carrinho.objects.get_or_create(name='test')
+        carrinho.itens.set({})
+        return Response({'status': 'Carrinho esvaziado'})

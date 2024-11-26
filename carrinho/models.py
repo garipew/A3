@@ -15,8 +15,8 @@ class CarrinhoItem(models.Model):
 
 class Carrinho(models.Model):
     # O carrinho como um todo
-    sessao = models.CharField(max_length=40, unique=True)
+    name = models.CharField(max_length=40, default='test')
     itens = models.ManyToManyField(CarrinhoItem, related_name="itens")
     def calcular_preco(self):
-        return sum(i.calcular_preco for i in self.itens.all())
+        return sum(i.calcular_preco() for i in self.itens.all())
      
