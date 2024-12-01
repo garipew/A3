@@ -32,3 +32,20 @@ Unix:
 ```
 python3 manage.py runserver
 ```
+
+
+## Uso
+A presente API tem como objetivo garantir suporte à um ecommerce, especificamente uma loja de camisetas. Para alcançar tal objetivo, foram definidas certas funções com finalidades diferentes. As principais são:
+
+**Registrar produtos**: Essa operação serve para adicionar novos produtos no banco de dados da loja. Para utiliza-la basta enviar uma requisição POST para '/api/camiseta/' contendo no corpo: nome, preco, quantidade, descricao e img (o link para a imagem do produto).
+O mesmo caminho, ou seja, '/api/camiseta/', em uma requisição GET retorna como resposta uma lista de todas as camisetas registradas e seus detalhes.
+
+**Adicionar ao carrinho**: Usuários podem adicionar itens ao carrinho fazendo uma requisição POST para '/api/carrinho/adicionar\_item/\<int:camiseta\_id\>/', no corpo da requisição, opcionalmente pode ser enviada a quantidade desejada.
+
+**Remover do carrinho**: Seguindo a mesma lógica, caso seja desejado remover algum item do carrinho é possível faze-lo enviando uma requisicao POST para '/api/carrinho/remover\_item/\<int:camiseta\_id\>/', é possível incluir a quantidade no corpo da requisição também.
+
+**Limpar carrinho**: Para remover todos os itens do carrinho basta enviar uma requisição POST para '/api/carrinho/esvaziar/'.
+
+**Realizar compra**: Para concluir a compra envie uma requisição POST para '/api/carrinho/comprar/'. Dessa forma, um novo pedido será criado e o carrinho esvaziado.
+
+**Listar pedidos**: Para visualizar os pedidos existentes, basta enviar uma requisição GET para '/api/pedidos/'.
