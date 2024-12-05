@@ -1,5 +1,6 @@
 from django.db import models
 from produto.models import Camiseta
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -15,7 +16,7 @@ class CarrinhoItem(models.Model):
 
 class Carrinho(models.Model):
     # O carrinho como um todo
-    name = models.CharField(max_length=40, default='test')
+    dono = models.ForeignKey(User, on_delete=models.CASCADE)
     itens = models.ManyToManyField(CarrinhoItem, related_name="itens")
     def calcular_preco(self):
         return sum(i.calcular_preco() for i in self.itens.all())
