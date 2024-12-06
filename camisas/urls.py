@@ -27,6 +27,8 @@ router.register(r'pedidos', PedidoViewSet, basename='pedidos')
 router.register(r'camiseta', CamisetaViewSet, basename='produtos')
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('usuario.urls')),
+    path('', include('main.urls')),
     path('api/', include(router.urls)),
     path('api/carrinho/', include('carrinho.urls')),
 ]

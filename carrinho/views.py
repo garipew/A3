@@ -5,14 +5,14 @@ from .models import Carrinho, CarrinhoItem
 from pedido.models import Pedido, PedidoItem
 from .serializers import CarrinhoSerializer, CarrinhoItemSerializer
 from django.shortcuts import get_object_or_404
+from rest_framework.permissions import IsAuthenticated
 
 class CarrinhoViewSet(viewsets.ViewSet):
+	permission_classes = [IsAuthenticated]
 	def list(self, request):
-		if request.user.is_authenticated:
-			carrinho,created = Carrinho.objects.get_or_create(dono=request.user)
-			serializer = CarrinhoSerializer(carrinho)
-			return Response(serializer.data)
-		return Response({'status': 'Usuario nao autenticado'})
+		carrinho,created = Carrinho.objects.get_or_create(dono=request.user)
+		serializer = CarrinhoSerializer(carrinho)
+		return Response(serializer.data)
 
 	def adicionar_item(self, request, camiseta_id=None):
 		if request.user.is_authenticated:
