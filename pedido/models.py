@@ -1,5 +1,6 @@
 from django.db import models
 from produto.models import Camiseta
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -12,6 +13,7 @@ class PedidoItem(models.Model):
 		return self.camiseta.nome + ' ' + str(self.quantidade)
 
 class Pedido(models.Model):
+	dono = models.ForeignKey(User, on_delete=models.CASCADE)
 	status = models.CharField(max_length=25, default='Em analise')
 	itens = models.ManyToManyField(PedidoItem, related_name="itens")
 	def calcular_preco(self):

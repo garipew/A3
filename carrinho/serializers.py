@@ -5,7 +5,7 @@ from produto.models import Camiseta
 class CarrinhoItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarrinhoItem
-        fields = ['id', 'camiseta', 'quantidade', 'calcular_preco']
+        fields = '__all__'
 
 class CarrinhoSerializer(serializers.ModelSerializer):
     itens = CarrinhoItemSerializer(many=True, read_only=True)
@@ -13,5 +13,5 @@ class CarrinhoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Carrinho
-        fields = ['id', 'name', 'itens', 'total_preco']
+        fields = '__all__'
 
